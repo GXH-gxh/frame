@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 
+	configuration：整个mybatis环境的配置，主要负责连接数据库
+ -->
+<configuration>
+
+
+
+
+	<!-- 引入database.properties -->
+	<properties resource="database.properties"/>
+	
+	
+	<!-- 设置全局参数配置 -->
+	<settings>
+		<!-- 配置log4j日志信息 -->
+		<setting name="logImpl" value="log4j"/>
+		<!-- 设置自动映射 
+				NONE:禁用
+				PARTIAL:自动匹配，关联属性无法映射
+				FULL：自动匹配，能够成功映射关联属性
+	    -->
+		<setting name="autoMappingBehavior" value="PARTIAL"/>
+	</settings>
+	
+	<!-- 配置别名 -->
+	<typeAliases>
+		<!-- 给整个包下所有的类定义别名:实体类的名称就是别名 -->
+		<package name="com.smbms.entity"/>
+	</typeAliases>
+	
+
+	
+	
+
+  <!-- environments：连接数据库的环境
+  			default：默认使用的配置
+   -->
+  <environments default="mysql">
+  	<!-- 配置mysql数据库 -->
+    <environment id="mysql">
+      <!-- 事务管理器：
+      	 	JDBC：采用JDBC事务
+       -->
+      <transactionManager type="JDBC"/>
+      <!-- 配置数据源 -->
+      <dataSource type="POOLED">
+      	<!-- 数据库驱动 -->
+        <property name="driver" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+      </dataSource>
+    </environment>
+   
+  </environments>
+  
+  
+  <!-- 加载映射文件 -->
+  <mappers>
+  	<!-- 批量加载映射文件 -->
+  	<package name="com.smbms.dao"/>
+  </mappers>  
+
+</configuration>

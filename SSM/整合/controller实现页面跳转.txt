@@ -1,0 +1,3 @@
+重定向：redirect
+转发：forward
+示例：return "forward:/login.jsp";

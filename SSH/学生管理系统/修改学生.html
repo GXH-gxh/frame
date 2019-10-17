@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>修改学生</title>
+    <link href="css/add.css" rel="stylesheet">
+</head>
+<body>
+<div id="all">
+    <h1>修改学生信息</h1>
+    <form action="#" method="post">
+        <div class="input">
+            <label>姓名：</label>
+            <input type="text" name="username" id="username">
+        </div>
+        <div class="input" style="margin-right:120px">
+            <label>性别：</label>
+            <input type="radio" name="sex" value="男" checked >男
+            <input type="radio" name="sex" value="女">女
+        </div>
+        <div class="input">
+            <label>电话：</label>
+            <input type="text" name="phone" id="phone">
+        </div>
+        <div class="input">
+            <label>年级：</label>
+            <select name="gradeId" style="width: 160.8px" id="gradeId">
+                <option value="">请选择</option>
+                <option value="1">S1</option>
+                <option value="2">S2</option>
+                <option value="3">Y2</option>
+            </select>
+        </div>
+        <div class="input">
+            <label>生日：</label>
+            <input type="text" name="birthday" id="birthday">
+        </div>
+        <div class="input">
+            <input type="button" value="保存" class="btn" id="btn">
+            <input type="button" value="返回" class="btn">
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

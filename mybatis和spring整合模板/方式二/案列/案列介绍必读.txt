@@ -1,0 +1,4 @@
+通过实现类继承SqlSessionDaoSupport
+简化方式一
+需要修改spring核心配置文件，不需要配置SQLSessionTemplate
+使用模板时需要修改：数据库名，用户名，密码，数据库路径，包名，bean的相关配置

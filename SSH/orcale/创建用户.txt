@@ -1,0 +1,12 @@
+/*
+  创建用户(必须指定密码)
+  gj:是用户名
+  123:是密码
+*/
+create user gj
+identified by 123;
+
+/*
+  给用户分配权限
+*/
+grant dba to gj;

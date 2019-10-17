@@ -1,0 +1,22 @@
+// 增  删 改  通用方法
+	public Integer executeUppdate(String sql,Object...obj) {
+		// 受影响的行数
+		Integer rowCount = 0;
+		Connection conn = getConnection();
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			if (obj != null) {
+				for (int i = 0; i < obj.length; i++) {
+					ps.setObject(i+1, obj[i]);
+				}
+			}
+			rowCount = ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			Close(conn, ps, null);
+		}
+		return rowCount;
+	}

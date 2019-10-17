@@ -1,0 +1,4 @@
+window和linux分隔符其实就是\和/的区别，
+其实让文件路径根据服务器的系统的不同而不同就可以了，
+而java已经给我们提供方法了 System.getProperty("file.separator")
+能根据系统的不同获取文件路径的分隔符

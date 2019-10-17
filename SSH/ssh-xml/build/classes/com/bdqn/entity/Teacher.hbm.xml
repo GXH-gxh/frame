@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- name:配置关联的实体类路径 table：关联的表名称，实体类与表名同名，可以省略  -->
+    <class name="com.bdqn.entity.Teacher" table="teacher" >
+    	<!-- name属性必填  -->
+        <id name="id" type="java.lang.Integer" column="id">
+        	<!-- 主键生成策略 -->
+         	<generator class="increment"/>
+        </id>
+        <property name="username" type="java.lang.String">
+            <column name="username" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

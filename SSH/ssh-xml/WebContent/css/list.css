@@ -1,0 +1,22 @@
+
+#all{
+    width: 100%;
+}
+
+h1,table{
+    text-align: center;
+}
+
+#searchBox{
+    margin-left: 400px;
+}
+
+button{
+    position: relative;
+    left: 1080px;
+    bottom: 25px;
+}
+.page{
+    text-align: center;
+    margin: 10px 10px 0 0;
+}

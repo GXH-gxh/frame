@@ -1,0 +1,3 @@
+fileName="xxx.txt";
+String path = ServletActionContext.getServletContext().getRealPath("/upload/"+fileName);
+获取web项目中服务器路径里的upload文件夹中文件名是xxx.txt的文件路径

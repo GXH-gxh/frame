@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+
+	<!-- 配置数据源DataSource -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<!-- 驱动 -->
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<!-- 连接url -->
+		<property name="url" value="jdbc:mysql://localhost:3306/smbms?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC"/>
+		<!-- 数据库用户名 -->
+		<property name="username" value="root"/>
+		<!-- 数据库密码 -->
+		<property name="password" value="root"/>
+	</bean>
+	
+	<!-- 配置SQLSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 引用数据源 -->
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 加载mybatis-config配置文件 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		<!-- 加载mybatis映射文件 -->
+		<property name="mapperLocations">
+			<list>
+				<!-- 映射文件的路径 -->
+				<value>classpath:cn/smbms/dao/**/*.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 配置SQLSessionTemplate -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<!-- 引用sqlSessionFactory -->
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+	
+	<!-- 配置dao -->
+	<bean id="userMapper" class="cn.smbms.dao.impl.UserMapperImpl">
+		<property name="sqlSession" ref="sqlSessionTemplate"></property>
+	</bean>
+	
+	<!-- 配置userService -->
+	<bean id="userService" class="cn.smbms.service.impl.UserServiceImpl">
+		<property name="userMapper" ref="userMapper"></property>
+	</bean>
+</beans>

@@ -1,0 +1,7 @@
+方式一：
+	* 使用SQLSessionTemplate方式进行实现，需要在实现类中设置sqlSessionTemplate属性，提供set方法
+	  配置bean时该sqlSessionTemplate属性需要使用ref引用模板配置中的SQLSessionTemplate
+
+方式二：
+	* 使用SQLSessionFactory方式进行实现，实现类需要继承SqlSessionDaoSupport类，简化了方式一，
+		无需配置SQLSessionTemplate，但是在配置实现类bean时需要进行属性注入	<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>

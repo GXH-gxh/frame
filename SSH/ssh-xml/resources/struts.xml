@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+
+	<!-- 设置主题风格 -->
+	<constant name="struts.ui.theme" value="simple" />
+	<!-- 开启动态调用 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<!-- 启用开发者模式 -->
+	<constant name="struts.devMode" value="true"/>
+
+	<!-- 公共通用配置 -->
+	<package name="default" namespace="/" extends="struts-default">
+		<global-results>
+			<result name="login">/login.jsp</result>
+		</global-results>
+		
+			<!-- 设置白名单 -->
+		<global-allowed-methods>regex:.*</global-allowed-methods>
+	</package>
+	
+	<!-- 教师模块 -->
+	<package name="teacher" namespace="/teacher" extends="default">
+		<action name="login" class="com.bdqn.action.TeacherAction" method="login">
+			<result name="login_success" type="redirectAction">../student/stu_findStudentList.action</result>
+		</action>
+	</package> 
+	
+	<!-- 学生模块 -->
+	<package name="student" namespace="/student" extends="default">
+		<action name="stu_*" class="com.bdqn.action.StudentAction" method="{1}">
+			<result name="list">/list.jsp</result>
+		</action>
+	</package> 
+</struts>

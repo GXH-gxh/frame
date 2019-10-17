@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+
+	
+	<!-- 数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<!-- 驱动 -->
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<!-- url -->
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
+		<!-- 数据库用户名 -->
+		<property name="username" value="liang"/>
+		<!-- 数据库登录密码 -->
+		<property name="password" value="123"/>
+	</bean>
+	
+	<!-- 配置会话工厂,用于创建会话对象 -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<!-- 引用数据源 -->
+		<property name="dataSource" ref="dataSource"/>
+		<!-- hibernate配置 -->
+		<property name="hibernateProperties">
+			<props>
+				<!-- hibernate方言 -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+				<!-- 显示SQL语句 -->
+				<prop key="hibernate.show_sql">true</prop>
+				<!-- 格式化SQL语句 -->
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+		
+		<!-- 加载单个映射文件 -->
+		<!-- <property name="mappingResources">
+			<list>
+				<value>com/bdqn/entity/Teacher.hbm.xml</value>
+				<value>com/bdqn/entity/TStudent.hbm.xml</value>
+			</list>
+		</property> -->
+		
+		<!-- 批量加载映射文件 -->
+		<property name="mappingLocations"> 
+		    <value>classpath:/com/bdqn/entity/*.hbm.xml</value> 
+		</property>
+		
+	</bean>
+	
+	<!-- 注入teacherDao -->
+	<bean id="teacherDao" class="com.bdqn.dao.impl.TeacherDaoImpl">
+	 	<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 注入teacherService -->
+	<bean id="teacherService" class="com.bdqn.service.impl.TeacherServiceImpl">
+		<property name="teacherDao" ref="teacherDao"></property>
+	</bean>	
+	
+	<!-- 注入studentDao -->
+	<bean id="studentDao" class="com.bdqn.dao.impl.StudentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 注入studentService -->
+	<bean id="studentService" class="com.bdqn.service.impl.StudentServiceImpl">
+		<property name="studentDao" ref="studentDao"></property>
+	</bean>
+</beans>
